@@ -25,48 +25,26 @@ public class ServiceTemplateImpl implements IServiceTemplate {
 		this.sauver(template);
 	}
 
-	public Object lire(Object obj, Class cls) throws MNVException, MNVException_Exception {
-		// TODO Auto-generated method stub
-		return sCrud.lire(obj, TypeStructure.TEMPLATE);
-	}
-
-	public List<Object> lister(Class cls) throws MNVException, MNVException_Exception {
-		// TODO Auto-generated method stub
-		return sCrud.lister(TypeStructure.TEMPLATE);
-	}
-
 	public Object sauver(Object obj) throws MNVException {
 		// TODO Auto-generated method stub
 		try {
-			return sCrud.sauver(obj);
+			return (Template) sCrud.sauver(obj);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return obj;
+		return null ;
 	}
 
 	public Object supprimer(Object obj) throws MNVException {
 		// TODO Auto-generated method stub
 		try {
-			return sCrud.supprimer(obj);
+			return (Template) sCrud.supprimer(obj);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return obj;
-	}
-
-	@Override
-	public Object lire(Object arg0, TypeStructure arg1) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<?> lister(TypeStructure arg0) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
+		return null ;
 	}
 
 	public PersistanceCli getsCrud() {
@@ -77,6 +55,25 @@ public class ServiceTemplateImpl implements IServiceTemplate {
 		this.sCrud = sCrud;
 	}
 	
+	public Object lire(Object template, TypeStructure typeStructure) throws MNVException {
+		try {
+			return sCrud.lire(template, typeStructure) ;
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null ;
+	}
 	
+	public Set<?> lister(TypeStructure typeStructure) throws MNVException {
+		
+		try {
+			return  (Set<?>) sCrud.lister(typeStructure);
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

@@ -17,20 +17,19 @@ public class ServiceArticleImpl implements IServiceArticle {
 	PersistanceCli sCrud ;
 	
 
-	public void changerEtat(EtatPublication etatPublication, Object idArticle) throws MNVException {
-		Article article = null;
+	public void changerEtat(EtatPublication etatPublication, Article article) throws MNVException {
 		try {
-			article = (Article) sCrud.lire(idArticle, TypeStructure.ARTICLE);
+			article.setEtat(etatPublication);
+			sCrud.sauver(article) ;
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		article.setEtat(etatPublication);
 	}
 
-	public List<Object> lister(Class cl) throws MNVException {
+	public Set<?> lister(TypeStructure typeStructure) throws MNVException {
 		try {
-			return sCrud.lister(TypeStructure.ARTICLE);
+			return (Set<?>) sCrud.lister(typeStructure);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,31 +38,38 @@ public class ServiceArticleImpl implements IServiceArticle {
 	}
 
 	/**
-	 * @param idArticle
+	 * @param article
 	 * @throws MNVException
+	 * @return Article
 	 */
 
-	public Object supprimer(Object idArticle) throws MNVException {
+	public Object supprimer(Object article) throws MNVException {
 		// TODO Auto-generated method stub
 		try {
-			return sCrud.supprimer(idArticle);
+			return (Article) sCrud.supprimer(article);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return idArticle;
+		return null ;
 	}
+	
+	/**
+	 * @param article : L'article à sauvegarder
+	 * @throws MNVException
+	 * @return Article
+	 */
 
-	public Object sauver(Object idArticle) throws MNVException {
+	public Object sauver(Object article) throws MNVException {
 		// TODO Auto-generated method stub
 		try {
-			return sCrud.sauver(idArticle);
+			return (Article) sCrud.sauver(article);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// passer l'id et le type
-		return idArticle;
+		return null ;
 	}
 
 	public PersistanceCli getsCrud() {
@@ -73,36 +79,25 @@ public class ServiceArticleImpl implements IServiceArticle {
 	public void setsCrud(PersistanceCli sCrud) {
 		this.sCrud = sCrud;
 	}
+	
+	
 
-	public Object lire(Object idArticle, Class cls) throws MNVException {
+	public Object lire(Object article, TypeStructure typeStructure) throws MNVException {
 		try {
-			return sCrud.lire(idArticle, TypeStructure.ARTICLE);
+			return sCrud.lire(article, typeStructure);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		return cls;
+		return null ;
 
-	}
-
-	@Override
-	public Object lire(Object arg0, fr.cap.wikimnv.core.pojo.TypeStructure arg1)
-			throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<?> lister(fr.cap.wikimnv.core.pojo.TypeStructure arg0)
-			throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	public Object rechercher(Query query, Map<String, Object> params) {
 		// return sCrud.faireRequete(query, params) ;
 		return null ;
 	}
+
 
 }

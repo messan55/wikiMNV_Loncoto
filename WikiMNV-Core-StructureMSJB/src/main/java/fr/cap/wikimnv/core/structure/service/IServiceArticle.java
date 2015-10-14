@@ -4,6 +4,7 @@ import javax.jws.WebService;
 
 import fr.cap.wikimnv.core.commons.ICRUDGeneric;
 import fr.cap.wikimnv.core.commons.exception.MNVException;
+import fr.cap.wikimnv.core.pojo.Article;
 import fr.cap.wikimnv.core.pojo.EtatPublication;
 
 
@@ -18,6 +19,6 @@ public interface IServiceArticle extends ICRUDGeneric {
 	 * @param etatPublication
 	 * @param idArticle
 	 */
-	void changerEtat (EtatPublication etatPublication, Object idArticle)throws MNVException;
+	void changerEtat (EtatPublication etatPublication, Article article)throws MNVException;
 
 }

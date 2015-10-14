@@ -3,7 +3,6 @@ package fr.cap.wikimnv.core.structure.service.impl;
 
 
 import java.util.List;
-
 import java.util.Set;
 
 import fr.cap.wikimnv.core.commons.exception.MNVException;
@@ -54,24 +53,10 @@ public class ServiceSignalementImpl implements IServiceSignalement {
 	public Signalement traiter(Object id) throws MNVException {
 		return changerEtat(EtatSignalement.TRAITE, id);
 	}
-
-
-	
-	/*public List<Object> lister(Class cl) throws MNVException, MNVException_Exception {
-		return crud.lister(TypeStructure.SIGNALEMENT);
-	}
-
-
-	
-	public Object lire(Object key, Class cl) throws MNVException, MNVException_Exception {
-		return crud.lire(key, TypeStructure.SIGNALEMENT);
-	}*/
-
-
 	
 	public Object supprimer(Object obj) throws MNVException {
 		try {
-			return sCrud.supprimer(obj);
+			return (Signalement) sCrud.supprimer(obj);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +70,7 @@ public class ServiceSignalementImpl implements IServiceSignalement {
 	public Object sauver(Object obj) throws MNVException {
 		
 			try {
-				return sCrud.sauver(obj);
+				return (Signalement) sCrud.sauver(obj);
 			} catch (MNVException_Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -95,22 +80,30 @@ public class ServiceSignalementImpl implements IServiceSignalement {
 		
 	}
 
-
 	
 	public void signaler(Contenu contenu, User user) throws MNVException {
 		Signalement sig = new Signalement(contenu, user);
 		sauver(sig);		
 	}
 	
-	
-	public Object lire(Object arg0, TypeStructure arg1) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
+	public Object lire(Object sig, TypeStructure typeStructure) throws MNVException {
+		try {
+			return sCrud.lire(sig, typeStructure) ;
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null ;
 	}
 	
-	
-	public Set<?> lister(TypeStructure arg0) throws MNVException {
-		// TODO Auto-generated method stub
+	public Set<?> lister(TypeStructure typeStructure) throws MNVException {
+		
+		try {
+			return  (Set<?>) sCrud.lister(typeStructure);
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

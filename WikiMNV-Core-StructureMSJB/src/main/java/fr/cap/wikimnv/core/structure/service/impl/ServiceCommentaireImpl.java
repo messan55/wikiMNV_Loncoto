@@ -16,21 +16,22 @@ import fr.cap.wikimnv.core.structure.service.IServiceCommentaire;
 
 public class ServiceCommentaireImpl implements IServiceCommentaire {
 	PersistanceCli sCrud ;
-	  
-	
-	public ServiceCommentaireImpl() {		
-	}
 	
 	/**
 	 * Permet d'obtenir la liste de tous les commentaires
 	 *@return  Renvoie la liste des comentaires
 	 *@author  Sohail, Messan  
-	 * @throws MNVException_Exception 
 	 */ 
 	
-	public List<Object> lister() throws MNVException, MNVException_Exception {
+	public Set<?> lister(TypeStructure typeStructure) throws MNVException {
 		
-		return  sCrud.lister(TypeStructure.COMMENTAIRE );
+		try {
+			return  (Set<?>) sCrud.lister(typeStructure);
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -38,12 +39,17 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	 * @param Le commentaire à lire
 	 * @return  Renvoie le commentaire demandé en paramètre
 	 * @author Sohail, Messan
-	 * @throws MNVException_Exception 
 	 */ 
 
 	
-	public Object lire(Object commentaire) throws MNVException, MNVException_Exception {
-		return sCrud.lire(commentaire, TypeStructure.COMMENTAIRE) ;
+	public Object lire(Object commentaire, TypeStructure typeStructure) throws MNVException {
+		try {
+			return sCrud.lire(commentaire, typeStructure) ;
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null ;
 	}
 	
 	/**
@@ -57,12 +63,12 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	
 	public Object sauver(Object commentaire) throws MNVException {
 		try {
-			return sCrud.sauver(commentaire) ;
+			return (Commentaire) sCrud.sauver(commentaire) ;
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return commentaire;
+		return null ;
 	}
 	
 	/**
@@ -71,12 +77,17 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	 * @return le commentaire supprimé 
 	 * @author Sohail, Messan
 	 * @throws MNVException 
-	 * @throws MNVException_Exception 
 	 */
 
 	
-	public Commentaire supprimer(Commentaire commentaire) throws MNVException, MNVException_Exception {
-		return (Commentaire) sCrud.supprimer(commentaire) ;
+	public Commentaire supprimer(Object commentaire) throws MNVException {
+		try {
+			return (Commentaire) sCrud.supprimer(commentaire) ;
+		} catch (MNVException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -92,36 +103,6 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 		// Publie ou dépublie un commentaire
 		commentaire.setEtat(etat);
 		return (Commentaire) sauver(commentaire) ;
-	}
-
-	
-	public Set<?> lister(Class cls) throws MNVException {
-		
-		return null;
-	}
-
-	
-	public Object lire(Object obj, Class cls) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object supprimer(Object obj) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object lire(Object arg0, TypeStructure arg1) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<?> lister(TypeStructure arg0) throws MNVException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public PersistanceCli getsCrud() {
