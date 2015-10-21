@@ -2,7 +2,8 @@ package fr.cap.wikimnv.core.pojo;
 
 public enum TypeStructure {
 	
-	ARTICLE("Article"), 
+	ARTICLE("Article"),
+	COMMENTAIRE("Commentaire"),
 	PROFIL("Profil"), 
 	TAG("Tag"), 
 	TEMPLATE("Template"), 
