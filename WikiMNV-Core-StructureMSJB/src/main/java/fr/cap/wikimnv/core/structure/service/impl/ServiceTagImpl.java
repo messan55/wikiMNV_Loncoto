@@ -27,7 +27,6 @@ public class ServiceTagImpl implements IServiceTag {
 	@Autowired
 	PersistanceCli sCrud ;
 	
-	@Override
 	public Object supprimer(Object obj) throws MNVException {
 		try {
 			return (Tag) sCrud.supprimer(obj);
@@ -100,6 +99,20 @@ public class ServiceTagImpl implements IServiceTag {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	@Override
+	public Object lire(Object arg0, Class arg1) throws MNVException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void supprimer(Object arg0, Class arg1) throws MNVException {
+		// TODO Auto-generated method stub
+		
 	}	
 	
 }

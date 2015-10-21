@@ -3,6 +3,9 @@ package fr.cap.wikimnv.core.structure.service.impl;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import fr.cap.wikimnv.core.commons.exception.MNVException;
 import fr.cap.wikimnv.core.persistance.CrudService;
 import fr.cap.wikimnv.core.persistance.CrudService_Service;
@@ -17,6 +20,10 @@ import fr.cap.wikimnv.core.structure.service.IServiceCommentaire;
 public class ServiceCommentaireImpl implements IServiceCommentaire {
 	PersistanceCli sCrud ;
 	
+	public ServiceCommentaireImpl() {
+		sCrud = new PersistanceCli() ;
+	}
+
 	/**
 	 * Permet d'obtenir la liste de tous les commentaires
 	 *@return  Renvoie la liste des comentaires
@@ -26,7 +33,7 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	public Set<?> lister(TypeStructure typeStructure) throws MNVException {
 		
 		try {
-			return  (Set<?>) sCrud.lister(typeStructure);
+			return  (Set<Commentaire>) sCrud.lister(typeStructure);
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +51,7 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	
 	public Object lire(Object commentaire, TypeStructure typeStructure) throws MNVException {
 		try {
-			return sCrud.lire(commentaire, typeStructure) ;
+			return (Commentaire) sCrud.lire(commentaire, typeStructure) ;
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,14 +87,13 @@ public class ServiceCommentaireImpl implements IServiceCommentaire {
 	 */
 
 	
-	public Commentaire supprimer(Object commentaire) throws MNVException {
+	public void supprimer(Object commentaire) throws MNVException {
 		try {
-			return (Commentaire) sCrud.supprimer(commentaire) ;
+			sCrud.supprimer(commentaire) ;
 		} catch (MNVException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
 	}
 
 	/**
